@@ -2,6 +2,7 @@
 """ Console Module """
 import cmd
 import sys
+import shlex
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -118,10 +119,20 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        
+        arg_arr = shlex.split(args)
+        model = arg_arr[0]
+
+        if model not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        
+        arg_dict = {}
+        for token in arg_arr[1:]:
+            tok = token.split("=")
+            arg_dict[tok[0]] = tok[1].replace('_', ' ')
+
+        new_instance = HBNBCommand.classes[model](**arg_dict)
         storage.save()
         print(new_instance.id)
         storage.save()
