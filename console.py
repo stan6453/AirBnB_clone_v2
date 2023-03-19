@@ -133,7 +133,6 @@ class HBNBCommand(cmd.Cmd):
             arg_dict[tok[0]] = tok[1].replace('_', ' ')
 
         new_instance = HBNBCommand.classes[model](**arg_dict)
-        storage.save()
         print(new_instance.id)
         storage.save()
 
