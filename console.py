@@ -224,7 +224,6 @@ class HBNBCommand(cmd.Cmd):
             for k, v in storage._FileStorage__objects.items():
                 print_list.append(str(v))
 
-        
         output = ''
         print('[', end='')
         for item in print_list:

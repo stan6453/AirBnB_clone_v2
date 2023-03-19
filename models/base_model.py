@@ -6,10 +6,11 @@ from datetime import datetime
 
 def dict_convert_no_value(kwargs):
     for key, value in kwargs.items():
-        if value.isnumeric():
-            kwargs[key] = int(value)
-        elif isfloat(value):
-            kwargs[key] = float(value)
+        if key not in ['city_id', 'user_id', 'created_at', 'updated_at']:
+            if value.isnumeric():
+                kwargs[key] = int(value)
+            elif isfloat(value):
+                kwargs[key] = float(value)
 
     return kwargs
 
