@@ -4,6 +4,24 @@ import uuid
 from datetime import datetime
 
 
+def dict_convert_no_value(kwargs):
+    for key, value in kwargs.items():
+        if value.isnumeric():
+            kwargs[key] = int(value)
+        elif isfloat(value):
+            kwargs[key] = float(value)
+
+    return kwargs
+
+
+def isfloat(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
+
+
 class BaseModel:
     """A base class for all hbnb models"""
 
@@ -34,6 +52,7 @@ class BaseModel:
                 self.id = str(uuid.uuid4())
                 new = True
 
+            kwargs = dict_convert_no_value(kwargs)
             self.__dict__.update(kwargs)
 
             if new is not None:
