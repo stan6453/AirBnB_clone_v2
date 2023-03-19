@@ -29,7 +29,7 @@ class FileStorage:
             json.dump(temp, f)
 
     def delete(self, obj=None):
-        """ delete obj from __objects if it’s inside"""
+        """delete obj from __objects if it’s inside"""
         if obj is None:
             return
 
