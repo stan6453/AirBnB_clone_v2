@@ -6,7 +6,8 @@ from datetime import datetime
 
 def dict_convert_no_value(kwargs):
     for key, value in kwargs.items():
-        if key not in ['city_id', 'user_id', 'created_at', 'updated_at']:
+        if key not in ['city_id', 'user_id', 'created_at', 'updated_at']\
+                and type(value) not in [int, float, datetime]:
             if value.isnumeric():
                 kwargs[key] = int(value)
             elif isfloat(value):
