@@ -240,13 +240,23 @@ class HBNBCommand(cmd.Cmd):
                 if model not in HBNBCommand.classes:
                     print("** class doesn't exist **")
                     return
+                #returns an sqlalchemy iterable object
                 result = storage.all(HBNBCommand.classes[model])
                 print("[", end="")
                 [print(obj, end='') for obj in result]
                 print("]")
 
             else:
-                storage.all()
+                #returns an array of sqlalchemy iterable object
+                results = storage.all()
+                output = ''
+                print("[", end="")
+                for sqlalchemy_iter in results:
+                    for obj in sqlalchemy_iter:
+                        output += str(obj) + ', '
+                output = output[:-2]
+                print(output, end='')
+                print("]")
 
     def help_all(self):
         """ Help information for the all command """

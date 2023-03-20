@@ -37,14 +37,16 @@ class DBStorage():
         if cls:
             return self.__session.query(cls).all()
         else:
-            self.__session.query(State)
-            self.__session.query(City)
+
+            state_query = self.__session.query(State)
+            city_query = self.__session.query(City)
             """
             self.__session.query(User)
             self.__session.query(Amenity)
             self.__session.query(Place)
             self.__session.query(Review)
             """
+            return [state_query.all(), city_query.all()]
 
     def new(self, obj):
         """add the object to the current database session"""
