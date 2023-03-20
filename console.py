@@ -240,7 +240,7 @@ class HBNBCommand(cmd.Cmd):
                 if model not in HBNBCommand.classes:
                     print("** class doesn't exist **")
                     return
-                result= storage.all(HBNBCommand.classes[model])
+                result = storage.all(HBNBCommand.classes[model])
                 print("[", end="")
                 [print(obj, end='') for obj in result]
                 print("]")
