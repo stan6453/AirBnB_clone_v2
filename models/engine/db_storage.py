@@ -35,7 +35,7 @@ class DBStorage():
         """query on the current database session (self.__session) all objects
         depending of the class name (argument cls)"""
         if cls:
-            return self.__session.query(cls)
+            return self.__session.query(cls).all()
         else:
             self.__session.query(State)
             self.__session.query(City)

@@ -135,6 +135,7 @@ class HBNBCommand(cmd.Cmd):
 
         new_instance = HBNBCommand.classes[model](**arg_dict)
         print(new_instance.id)
+        storage.new(new_instance)
         storage.save()
 
     def help_create(self):
@@ -239,7 +240,11 @@ class HBNBCommand(cmd.Cmd):
                 if model not in HBNBCommand.classes:
                     print("** class doesn't exist **")
                     return
-                storage.all(HBNBCommand.classes[model])
+                result= storage.all(HBNBCommand.classes[model])
+                print("[", end="")
+                [print(obj, end='') for obj in result]
+                print("]")
+
             else:
                 storage.all()
 
