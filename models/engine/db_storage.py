@@ -15,8 +15,8 @@ from models.review import Review
 
 class DBStorage():
     """Database storage engine class for Airbnb project"""
-    _engine = None
-    _session = None
+    __engine = None
+    __session = None
 
     def __init__(self):
         """Initialize the Database storage"""
