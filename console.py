@@ -242,8 +242,12 @@ class HBNBCommand(cmd.Cmd):
                     return
                 # returns an sqlalchemy iterable object
                 result = storage.all(HBNBCommand.classes[model])
+                output = ''
                 print("[", end="")
-                [print(obj, end='') for obj in result]
+                for obj in result:
+                    output += str(obj) + ', '
+                output = output[:-2]
+                print(output, end='')
                 print("]")
 
             else:
