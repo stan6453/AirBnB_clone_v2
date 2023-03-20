@@ -25,18 +25,18 @@ class Place(BaseModel, Base):
     reviews = relationship('Review', backref='place',
                            cascade='all, delete, delete-orphan')
 
-    # '''For FileStorage'''
-    # @property
-    # def reviews(self):
-    #     '''
-    #     returns the list of Review instances
-    #     with place_id equals to the current Place.id => It will be the
-    #     FileStorage relationship between Place and Review
-    #     '''
-    #     from os import getenv
-    #     if getenv('HBNB_TYPE_STORAGE') != 'db':
-    #         from models import storage
-    #         from models.review import Review
-    #         result = storage.all(Review)
-    #         return [review_obj for review_obj in result.values()
-    #                 if self.id == review_obj.place_id]
+    '''For FileStorage'''
+    @property
+    def reviews(self):
+        '''
+        returns the list of Review instances
+        with place_id equals to the current Place.id => It will be the
+        FileStorage relationship between Place and Review
+        '''
+        from os import getenv
+        if getenv('HBNB_TYPE_STORAGE') != 'db':
+            from models import storage
+            from models.review import Review
+            result = storage.all(Review)
+            return [review_obj for review_obj in result.values()
+                    if self.id == review_obj.place_id]
