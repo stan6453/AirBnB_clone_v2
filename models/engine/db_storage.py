@@ -35,14 +35,16 @@ class DBStorage():
         """query on the current database session (self.__session) all objects
         depending of the class name (argument cls)"""
         if cls:
-            self.__session.query(cls)
+            return self.__session.query(cls)
         else:
-            self.__session.query(User)
             self.__session.query(State)
             self.__session.query(City)
+            """
+            self.__session.query(User)
             self.__session.query(Amenity)
             self.__session.query(Place)
             self.__session.query(Review)
+            """
 
     def new(self, obj):
         """add the object to the current database session"""

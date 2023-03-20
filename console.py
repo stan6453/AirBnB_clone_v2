@@ -3,6 +3,7 @@
 import cmd
 import sys
 import shlex
+from os import getenv
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -209,27 +210,39 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
-        print_list = []
 
-        if args:
-            args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
-                print("** class doesn't exist **")
-                return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
+        if getenv('HBNB_TYPE_STORAGE') != 'db':
+            print_list = []
+
+            if args:
+                model = args.split(' ')[0]  # remove possible trailing args
+                if model not in HBNBCommand.classes:
+                    print("** class doesn't exist **")
+                    return
+                for k, v in storage._FileStorage__objects.items():
+                    if k.split('.')[0] == model:
+                        print_list.append(str(v))
+            else:
+                for k, v in storage._FileStorage__objects.items():
                     print_list.append(str(v))
-        else:
-            for k, v in storage._FileStorage__objects.items():
-                print_list.append(str(v))
 
-        output = ''
-        print('[', end='')
-        for item in print_list:
-            output += item + ', '
-        output = output[:-2]
-        print(output, end='')
-        print(']')
+            output = ''
+            print('[', end='')
+            for item in print_list:
+                output += item + ', '
+            output = output[:-2]
+            print(output, end='')
+            print(']')
+        else:
+            if args:
+                model = args.split(' ')[0]  # remove possible trailing args
+                if model not in HBNBCommand.classes:
+                    print("** class doesn't exist **")
+                    return
+                storage.all(HBNBCommand.classes[model])
+            else:
+                storage.all()
+
 
     def help_all(self):
         """ Help information for the all command """
