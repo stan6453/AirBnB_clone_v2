@@ -240,14 +240,14 @@ class HBNBCommand(cmd.Cmd):
                 if model not in HBNBCommand.classes:
                     print("** class doesn't exist **")
                     return
-                #returns an sqlalchemy iterable object
+                # returns an sqlalchemy iterable object
                 result = storage.all(HBNBCommand.classes[model])
                 print("[", end="")
                 [print(obj, end='') for obj in result]
                 print("]")
 
             else:
-                #returns an array of sqlalchemy iterable object
+                # returns an array of sqlalchemy iterable object
                 results = storage.all()
                 output = ''
                 print("[", end="")
