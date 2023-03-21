@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """This module instantiates an object of class FileStorage"""
-__all__ = ["amenity", "base_model", "city", "place", "review",
-           "state", "user"]
+
 
 from os import getenv
 
@@ -14,3 +13,10 @@ else:
     storage = FileStorage()
 
 storage.reload()
+
+"""support for lines like `from models import *`
+"""
+if True:
+    from models.state import State
+    from models.city import City
+    from models.user import User
