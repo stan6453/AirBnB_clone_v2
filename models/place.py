@@ -70,7 +70,8 @@ class Place(BaseModel, Base):
             only Amenity object, otherwise, do nothing.
             """
             if amenity is not None:
-                if type(amenity).__name__ == 'Amenity':
+                from models.amenity import Amenity
+                if isinstance(amenity, Amenity):
                     if amenity.id not in self.amenity_ids:
                         self.amenity_ids.append(amenity.id)
 
