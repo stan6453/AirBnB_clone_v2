@@ -55,12 +55,11 @@ class Place(BaseModel, Base):
             returns the list of Amenity instances based on the attribute
             amenity_ids that contains all Amenity.id linked to the Place
             '''
-            if getenv('HBNB_TYPE_STORAGE') != 'db':
-                from models import storage
-                from models.amenity import Amenity
-                result = storage.all(Amenity)
-                return [amenity_obj for amenity_obj in result.values()
-                        if amenity_obj.id in self.amenity_ids]
+            from models import storage
+            from models.amenity import Amenity
+            result = storage.all(Amenity)
+            return [amenity_obj for amenity_obj in result.values()
+                    if amenity_obj.id in self.amenity_ids]
 
         @amenities.setter
         def amenities(self, amenity):
@@ -81,9 +80,8 @@ class Place(BaseModel, Base):
             with place_id equals to the current Place.id => It will be the
             FileStorage relationship between Place and Review
             '''
-            if getenv('HBNB_TYPE_STORAGE') != 'db':
-                from models import storage
-                from models.review import Review
-                result = storage.all(Review)
-                return [review_obj for review_obj in result.values()
-                        if self.id == review_obj.place_id]
+            from models import storage
+            from models.review import Review
+            result = storage.all(Review)
+            return [review_obj for review_obj in result.values()
+                    if self.id == review_obj.place_id]
