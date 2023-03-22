@@ -30,7 +30,7 @@ class Place(BaseModel, Base):
                                      ForeignKey('amenities.id'), primary_key=True))
 
         '''amenities for DBStorage'''
-        amenities = relationship('Amenity', backref='place_amenities',
+        amenities = relationship('Amenity', backref='places',
                                  secondary=place_amenity, viewonly=False)
 
         '''reviews for DBStorage'''
@@ -82,7 +82,6 @@ class Place(BaseModel, Base):
             with place_id equals to the current Place.id => It will be the
             FileStorage relationship between Place and Review
             '''
-            from os import getenv
             if getenv('HBNB_TYPE_STORAGE') != 'db':
                 from models import storage
                 from models.review import Review
