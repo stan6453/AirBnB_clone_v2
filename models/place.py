@@ -55,7 +55,6 @@ class Place(BaseModel, Base):
             returns the list of Amenity instances based on the attribute
             amenity_ids that contains all Amenity.id linked to the Place
             '''
-            from os import getenv
             if getenv('HBNB_TYPE_STORAGE') != 'db':
                 from models import storage
                 from models.amenity import Amenity
