@@ -43,7 +43,7 @@ class DBStorage():
             amenity_query = self.__session.query(Amenity).all()
             place_query = self.__session.query(Place).all()
             review_query = self.__session.query(Review).all()
-
+    
             return [state_query, city_query, user_query, amenity_query,
                     place_query, review_query]
 
