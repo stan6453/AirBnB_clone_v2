@@ -67,8 +67,8 @@ class Place(BaseModel, Base):
         def amenities(self, amenity):
             """
             Setter attribute amenities that handles append method for adding an
-            Amenity.id to the attribute amenity_ids. This method should accept only
-            Amenity object, otherwise, do nothing.
+            Amenity.id to the attribute amenity_ids. This method should accept
+            only Amenity object, otherwise, do nothing.
             """
             if amenity is not None:
                 if type(amenity).__name__ == 'Amenity':
