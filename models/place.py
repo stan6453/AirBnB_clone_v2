@@ -70,7 +70,8 @@ class Place(BaseModel, Base):
             """
             if amenity is not None:
                 if type(amenity).__name__ == 'Amenity':
-                    self.amenity_ids.append(amenity.id)
+                    if amenity.id not in self.amenity_ids:
+                        self.amenity_ids.append(amenity.id)
 
         '''reviews for FileStorage'''
         @property
