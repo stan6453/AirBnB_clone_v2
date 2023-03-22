@@ -84,5 +84,4 @@ class Place(BaseModel, Base):
             from models import storage
             from models.review import Review
             result = storage.all(Review)
-            return [review_obj for review_obj in result.values()
-                    if self.id == review_obj.place_id]
+            return [review_obj for review_obj in result.values() if self.id == review_obj.place_id]
