@@ -30,7 +30,7 @@ class Place(BaseModel, Base):
                                      ForeignKey('amenities.id'), primary_key=True))
 
         '''amenities for DBStorage'''
-        amenities = relationship('Amenity', backref='places',
+        amenities = relationship('Amenity', backref='place_amenities',
                                  secondary=place_amenity, viewonly=False)
 
         '''reviews for DBStorage'''
