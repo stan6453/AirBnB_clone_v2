@@ -12,6 +12,9 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    from models.place import place_amenity
+
 
 class DBStorage():
     """Database storage engine class for Airbnb project"""
