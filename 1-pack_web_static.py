@@ -16,4 +16,4 @@ def do_pack():
     output = f"web_static_{date_string}.tgz"
     local('mkdir -p ./versions')
     with lcd('./versions'):
-        local(f'tar -xzvf {output} ./web_static')
+        local(f'tar -xzvf {output} ../web_static')
