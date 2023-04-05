@@ -16,7 +16,7 @@ def do_pack():
     output = "web_static_{}.tgz".format(date_string)
     local('mkdir -p versions')
     stat = local('tar -cvzf versions/{} web_static'.format(output))
-    if stat.success:
-        return 'versions_{}'.format(output)
+    if stat.succeeded:
+        return 'versions/{}'.format(output)
     else:
         return None
