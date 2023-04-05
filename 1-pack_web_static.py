@@ -15,4 +15,8 @@ def do_pack():
     date_string = date.strftime('%Y%m%d%H%M%S')
     output = f"web_static_{date_string}.tgz"
     local('mkdir -p versions')
-    local(f'tar -cvzf versions/{output} web_static')
+    stat = local(f'tar -cvzf versions/{output} web_static')
+    if stat.success:
+        return f'versions_{output}'
+    else:
+        return None
