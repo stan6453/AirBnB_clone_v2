@@ -124,6 +124,6 @@ if [[ -e /data/web_static/current ]];then
 fi
 ln -s /data/web_static/releases/test /data/web_static/current
 chown -R ubuntu:ubuntu /data
-sed -i 's#location /redirect_me {#location /hbnb_static {\n\t\talias /data/web_static/current/;\n\t\ttry_files $uri $uri/ =404;\n\t}\n\n\tlocation /redirect_me {#' /etc/nginx/sites-available/default
+sed -i "s#location /redirect_me {#location /hbnb_static {\n\t\talias /data/web_static/current/;\n\t\ttry_files \$uri \$uri/ =404;\n\t}\n\n\tlocation /redirect_me {#" /etc/nginx/sites-available/default
 service nginx restart
 exit 0
