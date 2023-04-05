@@ -12,8 +12,8 @@ def do_pack():
     save a compressed version of web_static
     """
     date = datetime.now()
-    date_string = date.strftime("%Y%m%d%H%M%S")
+    date_string = date.strftime('%Y%m%d%H%M%S')
     output = f"web_static_{date_string}.tgz"
     local('mkdir -p ./versions')
-    with lcd("./versions"):
-        local(f"tar -xzvf {output} ./web_static")
+    with lcd('./versions'):
+        local(f'tar -xzvf {output} ./web_static')
