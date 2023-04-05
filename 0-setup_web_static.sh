@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 #install nginx
 
-#looks for nginx
-which nginx > /dev/null
-
 #install nginx if it was not found
-if [[ $? != 0 ]];then
+if ! which nginx;then
 	# Update package list and install nginx
 	apt-get update
 	apt-get -y install nginx
@@ -109,7 +106,7 @@ if [[ $? != 0 ]];then
 END
 
 	# /redirect_me redirection and default 404 page
-	echo "Hello World!" < index.nginx-debian.html
+	echo "Hello World!" > index.nginx-debian.html
 	echo "Ceci n'est pas une page" > /var/www/html/404.html
 	sed -i "s]#replace_with_sed]location /redirect_me {\n\t\treturn 301 https://quickref.me/bash;\n\t}\
 	\n\n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\tinternal;\n\t}]" /etc/nginx/sites-available/default
