@@ -27,7 +27,7 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    if local('[[ -e {} ]]'.format(archive_path)).failed:
+    if not path.exists(archive_path):
         return False
     if put(archive_path, "/tmp").failed:
         return False
