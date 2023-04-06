@@ -31,7 +31,7 @@ def do_deploy(archive_path):
     """
     deploy compressed version of web_static
     """
-    if local(" [[ -e {} ]]".format(archive_path)).failed:
+    if local("file {}".format(archive_path)).failed:
         return False
     if put(archive_path, "/tmp").failed:
         return False
