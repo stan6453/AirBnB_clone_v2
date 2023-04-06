@@ -26,6 +26,9 @@ def do_pack():
 
 
 def do_deploy(archive_path):
+    """
+    deploy compressed version of web_static
+    """
     if not path.exists(archive_path):
         return False
     if put(archive_path, "/tmp").failed:
