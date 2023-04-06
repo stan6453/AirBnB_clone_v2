@@ -31,8 +31,8 @@ def do_deploy(archive_path):
     """
     deploy compressed version of web_static
     """
+    print(archive_path)
     if not path.exists(archive_path):
-        print(archive_path, 'does not exist')
         return False
     if put(archive_path, "/tmp").failed:
         return False
