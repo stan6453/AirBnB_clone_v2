@@ -10,6 +10,7 @@ from os import path
 env.hosts = ['35.153.83.180', '18.209.223.169']
 env.user = 'ubuntu'
 env.key_filename = ['./school', '/school', '~/.ssh/school']
+env.port = 22
 
 
 def do_pack():
