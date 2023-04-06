@@ -31,9 +31,9 @@ def do_deploy(archive_path):
     """
     deploy compressed version of web_static
     """
-    print(archive_path)
-    if not path.exists(archive_path):
-        return False
+    with lcd('./'):
+        if not path.exists(archive_path):
+            return False
     if put(archive_path, "/tmp").failed:
         return False
     basename = path.basename(archive_path)
