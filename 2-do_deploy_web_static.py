@@ -33,15 +33,19 @@ def do_deploy(archive_path):
     """
     basename = path.basename(archive_path)
     filename = basename.split('.')[0]
-    try:
-        local("file ./{}".format(archive_path))
-        put("./{}".format(archive_path), "/tmp/", use_sudo=True, temp_dir="~/")
-        run("mkdir -p /data/web_static/releases/{}".format(filename))
-        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}"
-            .format(basename, filename))
-        run("rm -rf /tmp/{}".format(basename))
-        run("rm -rf /data/web_static/current")
-        run("ln -s /data/web_static/releases/{} /data/web_static/current"
-            .format(filename))
-    except Exception:
+    if local("file ./{}".format(archive_path)).failed:
+        return False
+    if put("./{}".format(archive_path), "/tmp/", use_sudo=True, temp_dir="~/").failed:
+        return False
+    if run("mkdir -p /data/web_static/releases/{}".format(filename)).failed:
+        return False
+    if run("tar -xzf /tmp/{} -C /data/web_static/releases/{}"
+           .format(basename, filename)).failed:
+        return False
+    if run("rm -rf /tmp/{}".format(basename)).failed:
+        return False
+    if run("rm -rf /data/web_static/current").failed:
+        return False
+    if run("ln -s /data/web_static/releases/{} /data/web_static/current"
+           .format(filename)).failed:
         return False
