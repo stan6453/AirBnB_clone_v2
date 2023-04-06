@@ -8,7 +8,6 @@ from datetime import datetime
 from os import path
 
 env.hosts = ['35.153.83.180', '18.209.223.169']
-env.key_filename = ['./school', '/school', '~/.ssh/school']
 
 
 def do_pack():
