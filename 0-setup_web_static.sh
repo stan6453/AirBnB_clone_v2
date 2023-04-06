@@ -118,7 +118,7 @@ fi
 
 mkdir -p /data/ /data/web_static /data/web_static/releases /data/web_static/shared
 mkdir -p /data/web_static/releases/test
-echo "i am a test html file" > /data/web_static/releases/test/index.html
+echo "Holberton School" > /data/web_static/releases/test/index.html
 if [[ -e /data/web_static/current ]];then
 	rm /data/web_static/current
 fi
