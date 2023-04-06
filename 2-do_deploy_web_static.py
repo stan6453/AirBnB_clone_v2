@@ -33,7 +33,7 @@ def do_deploy(archive_path):
     """
     if local("file ./{}".format(archive_path)).failed:
         return False
-    if put(archive_path, "/tmp").failed:
+    if put("./{}".format(archive_path), "/tmp").failed:
         return False
     basename = path.basename(archive_path)
     filename = basename.split('.')[0]
