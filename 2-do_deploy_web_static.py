@@ -35,9 +35,7 @@ def do_deploy(archive_path):
     filename = basename.split('.')[0]
     if local("file ./{}".format(archive_path)).failed:
         return False
-    print("./{}".format(archive_path))
-    print("/tmp/{}".format(basename))
-    if put(local_path="./{}".format(archive_path), remote_path="/tmp/{}".format(basename)).failed:
+    if put("./{}".format(archive_path), "/tmp/{}".format(basename), use_sudo=True).failed:
         return False
     if run("mkdir -p /data/web_static/releases/{}".format(filename)).failed:
         return False
