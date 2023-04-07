@@ -45,6 +45,11 @@ def do_deploy(archive_path):
             return False
         if run("rm -rf /tmp/{}".format(basename)).failed:
             return False
+        if run("mv /data/web_static/releases/{}/web_static/* \
+            /data/web_static/releases/{}/".format(filename, filename)).failed:
+            return False
+        if run("rm -rf /data/web_static/releases/{}/web_static".format(filename)).failed:
+            return False
         if run("rm -rf /data/web_static/current").failed:
             return False
         if run("ln -s /data/web_static/releases/{} /data/web_static/current"
