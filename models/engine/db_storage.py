@@ -82,6 +82,3 @@ class DBStorage():
         or close() on the class Session
         """
         self.__session.close()
-
-    def type(self):
-        return 'database storage'
