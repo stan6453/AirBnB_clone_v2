@@ -21,8 +21,6 @@ def tearItDown(exception):
 def list_states():
     """/states_list route"""
     states = storage.all(State)
-    if getenv('HBNB_TYPE_STORAGE') != 'db':
-        states = states.values()
     return render_template('7-states_list.html', states=states)
 
 

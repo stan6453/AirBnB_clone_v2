@@ -39,8 +39,13 @@ class DBStorage():
     def all(self, cls=None):
         """query on the current database session (self.__session) all objects
         depending of the class name (argument cls)"""
+        dict1 = {}
         if cls:
-            return self.__session.query(cls).all()
+            list1 = self.__session.query(cls).all()
+            for obj in list1:
+                key = obj.__class__.name + '.' + obj.id
+                dict1[key] = obj
+            return dict1
         else:
             state_query = self.__session.query(State).all()
             city_query = self.__session.query(City).all()
