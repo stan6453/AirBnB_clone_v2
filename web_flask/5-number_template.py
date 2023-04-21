@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Flask web application"""
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -26,11 +26,21 @@ def Cee(text):
 
 @app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def mypy(text=None):
+def mypy(text='is cool'):
     """/python/<text> route"""
-    if text:
-        return 'Python {}'.format(' '.join(text.split('_')))
-    return 'Python is cool'
+    return 'Python {}'.format(' '.join(text.split('_')))
+
+
+@app.route('/number/<int:n>', strict_slashes=False)
+def check_num(n):
+    """/number/<int:n> route"""
+    return '{} is a number'.format(n)
+
+
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def display_num(n):
+    """/number_template/<n> route"""
+    return render_template('5-number.html', number=n)
 
 
 if __name__ == '__main__':

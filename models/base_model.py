@@ -5,6 +5,7 @@ from models import storage
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
+from os import getenv
 
 Base = declarative_base()
 
@@ -14,8 +15,9 @@ class BaseModel:
 
     id = Column(String(60), primary_key=True)
     cur_date = datetime.utcnow()
-    created_at = Column(DateTime, nullable=False, default=cur_date)
-    updated_at = Column(DateTime, nullable=False, default=cur_date)
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        created_at = Column(DateTime, nullable=False, default=cur_date)
+        updated_at = Column(DateTime, nullable=False, default=cur_date)
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
@@ -57,7 +59,6 @@ class BaseModel:
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
-        from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
