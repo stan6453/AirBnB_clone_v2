@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route('/states_list', strict_slashes=False)
 def list_states():
     """/states_list route"""
-    return render_template('7-states_list.html', states=storage.all("State"))
+    return render_template('7-states_list.html', states=storage.all(State))
 
 
 @app.teardown_appcontext
