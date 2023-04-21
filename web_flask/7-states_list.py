@@ -9,6 +9,7 @@ from os import getenv
 app = Flask(__name__)
 
 app.jinja_env.lstrip_blocks = True
+app.jinja_env.strip_trailing_newlines = False
 
 
 @app.teardown_appcontext
