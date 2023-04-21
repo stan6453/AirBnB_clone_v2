@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def hello():
-    """base route"""
+    """base route to return 'Hello HBNB!'"""
     return 'Hello HBNB!'
 
 
