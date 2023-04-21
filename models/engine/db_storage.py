@@ -43,19 +43,15 @@ class DBStorage():
         if cls:
             list1 = self.__session.query(cls).all()
             for obj in list1:
-                key = obj.__class__.name + '.' + obj.id
+                key = obj.__class__.__name__ + '.' + obj.id
                 dict1[key] = obj
-            return dict1
         else:
-            state_query = self.__session.query(State).all()
-            city_query = self.__session.query(City).all()
-            user_query = self.__session.query(User).all()
-            amenity_query = self.__session.query(Amenity).all()
-            place_query = self.__session.query(Place).all()
-            review_query = self.__session.query(Review).all()
-
-            return [state_query, city_query, user_query, amenity_query,
-                    place_query, review_query]
+            for model in [State, City, User, Amenity, Place, Review]:
+                list1 = self.__session.query(model).all()
+                for obj in list1:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    dict1[key] = obj
+        return dict1
 
     def new(self, obj):
         """add the object to the current database session"""
