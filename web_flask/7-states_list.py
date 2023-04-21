@@ -9,6 +9,12 @@ from os import getenv
 app = Flask(__name__)
 
 
+@app.teardown_appcontext
+def tearItDown(exception):
+    """Reload the current SQLAlchemy session"""
+    storage.close()
+
+
 @app.route('/states_list', strict_slashes=False)
 def list_states():
     """/states_list route"""
@@ -16,12 +22,6 @@ def list_states():
     if getenv('HBNB_TYPE_STORAGE') != 'db':
         states = states.values()
     return render_template('7-states_list.html', states=states)
-
-
-@app.teardown_appcontext
-def tearItDown(exception):
-    """Reload the current SQLAlchemy session"""
-    storage.close()
 
 
 if __name__ == '__main__':
