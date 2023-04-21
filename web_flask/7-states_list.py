@@ -8,8 +8,6 @@ from os import getenv
 
 app = Flask(__name__)
 
-app.jinja_env.lstrip_blocks = True
-
 
 @app.teardown_appcontext
 def tearItDown(exception):
