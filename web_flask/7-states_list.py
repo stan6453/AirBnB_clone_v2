@@ -15,7 +15,7 @@ def list_states():
 
 
 @app.teardown_appcontext
-def teardown(exception):
+def tearItDown(exception):
     """Reload the current SQLAlchemy session"""
     storage.close()
 
