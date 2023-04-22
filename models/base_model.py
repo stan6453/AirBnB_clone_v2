@@ -16,10 +16,11 @@ else:
 class BaseModel:
     """A base class for all hbnb models"""
 
-    id = Column(String(60), primary_key=True, nullable=False)
-    cur_date = datetime.utcnow()
-    created_at = Column(DateTime, nullable=False, default=cur_date)
-    updated_at = Column(DateTime, nullable=False, default=cur_date)
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        id = Column(String(60), primary_key=True, nullable=False)
+        cur_date = datetime.utcnow()
+        created_at = Column(DateTime, nullable=False, default=cur_date)
+        updated_at = Column(DateTime, nullable=False, default=cur_date)
 
     def __init__(self, *args, **kwargs):
         """Instantiates a new model"""
