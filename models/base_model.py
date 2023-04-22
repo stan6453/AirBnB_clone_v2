@@ -62,23 +62,3 @@ class BaseModel:
         if dictionary.get('_sa_instance_state'):
             del dictionary['_sa_instance_state']
         return dictionary
-
-
-def dict_convert_no_value(kwargs):
-    for key, value in kwargs.items():
-        if key not in ['city_id', 'user_id', 'created_at', 'updated_at']\
-                and type(value) not in [int, float, datetime]:
-            if value.isnumeric():
-                kwargs[key] = int(value)
-            elif isfloat(value):
-                kwargs[key] = float(value)
-
-    return kwargs
-
-
-def isfloat(num):
-    try:
-        float(num)
-        return True
-    except ValueError:
-        return False
