@@ -2,9 +2,8 @@
 """ Console Module """
 import cmd
 import sys
-import shlex
 from models.base_model import BaseModel
-from models import storage, storage_type
+from models.__init__ import storage
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -82,10 +81,9 @@ class HBNBCommand(cmd.Cmd):
                         # _args = _args.replace('\"', '')
             line = ' '.join([_cmd, _cls, _id, _args])
 
-        except Exception as mess:
+        except Exception:
             pass
-        finally:
-            return line
+        return line
 
     def postcmd(self, stop, line):
         """Prints if isatty is false"""
@@ -114,28 +112,38 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    def do_create(self, args):
+    def do_create(self, arg):
         """ Create an object of any class"""
-        if not args:
+        parameters = {}
+        args = arg.split()
+        if len(args) == 0:
             print("** class name missing **")
             return
-
-        arg_arr = shlex.split(args)
-        model = arg_arr[0]
-
-        if model not in HBNBCommand.classes:
+        active_cl = args[0]
+        if active_cl not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
+        for param in args[1:]:
+            if '=' not in param:
+                continue
+            k, v = param.split('=', 1)
+            if v[0] == '"' and v[-1] == '"':
+                v = v[1:-1].replace('_', ' ')
 
-        arg_dict = {}
-        for token in arg_arr[1:]:
-            tok = token.split("=")
-            arg_dict[tok[0]] = tok[1].replace('_', ' ')
-
-        new_instance = HBNBCommand.classes[model](**arg_dict)
-        print(new_instance.id)
-        storage.new(new_instance)
-        storage.save()
+            elif '.' in v:
+                try:
+                    v = float(v)
+                except ValueError:
+                    continue
+            else:
+                try:
+                    v = int(v)
+                except ValueError:
+                    continue
+            parameters[k] = v
+        new = HBNBCommand.classes[active_cl](**parameters)
+        new.save()
+        print(new.id)
 
     def help_create(self):
         """ Help information for the create method """
@@ -210,7 +218,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
-
         print_list = []
 
         if args:
