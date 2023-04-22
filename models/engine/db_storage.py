@@ -40,19 +40,15 @@ class DBStorage():
     def all(self, cls=None):
         """query on the current database session (self.__session) all objects
         depending of the class name (argument cls)"""
-        dict1 = {}
-        if cls and cls in [State, City, User, Amenity, Place, Review]:
-            list1 = self.__session.query(cls).all()
-            for obj in list1:
-                key = obj.__class__.__name__ + '.' + obj.id
-                dict1[key] = obj
-        elif cls is None:
-            for model in [State, City, User, Amenity, Place, Review]:
-                list1 = self.__session.query(model).all()
-                for obj in list1:
-                    key = obj.__class__.__name__ + '.' + obj.id
-                    dict1[key] = obj
-        return dict1
+        result_dict = {}
+        for model in [User, State, City, Place, Amenity, Review]:
+            if cls is not None and model != cls:
+                continue
+            query_results = self.__session.query(model).all()
+            for obj in query_results:
+                key = "{}.{}".format(type(obj).__name__, obj.id)
+                result_dict[key] = obj
+        return result_dict
 
     def new(self, obj):
         """add the object to the current database session"""
