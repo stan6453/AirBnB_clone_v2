@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Database storage engine for Airbnb project"""
-from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
+from os import getenv
 
 from models.user import User
 from models.state import State
@@ -34,19 +34,19 @@ class DBStorage():
             pool_pre_ping=True
         )
 
-        if (getenv('HBNB_ENV') == 'test'):
+        if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
         """query on the current database session (self.__session) all objects
         depending of the class name (argument cls)"""
         dict1 = {}
-        if cls:
+        if cls and cls in [State, City, User, Amenity, Place, Review]:
             list1 = self.__session.query(cls).all()
             for obj in list1:
                 key = obj.__class__.__name__ + '.' + obj.id
                 dict1[key] = obj
-        else:
+        elif cls is None:
             for model in [State, City, User, Amenity, Place, Review]:
                 list1 = self.__session.query(model).all()
                 for obj in list1:
