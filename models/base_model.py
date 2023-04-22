@@ -37,7 +37,7 @@ class BaseModel:
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         object_dict = self.__dict__.copy()
-        if object_dict.get('_sa_instance_state'):
+        if object_dict.get('_sa_instance_state') is not None:
             del object_dict['_sa_instance_state']
         return '[{}] ({}) {}'.format(cls, self.id, object_dict)
 
@@ -59,6 +59,6 @@ class BaseModel:
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-        if dictionary.get('_sa_instance_state'):
+        if dictionary.get('_sa_instance_state') is not None:
             del dictionary['_sa_instance_state']
         return dictionary
