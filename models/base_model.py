@@ -13,11 +13,10 @@ Base = declarative_base()
 class BaseModel:
     """A base class for all hbnb models"""
 
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
-        id = Column(String(60), primary_key=True)
-        cur_date = datetime.utcnow()
-        created_at = Column(DateTime, nullable=False, default=cur_date)
-        updated_at = Column(DateTime, nullable=False, default=cur_date)
+    cur_date = datetime.utcnow()
+    created_at = Column(DateTime, nullable=False, default=cur_date)
+    updated_at = Column(DateTime, nullable=False, default=cur_date)
+    id = Column(String(60), primary_key=True)
 
     def __init__(self, *args, **kwargs):
         """Instantiates a new model"""
@@ -33,7 +32,7 @@ class BaseModel:
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        object_dict = self.__dict__
+        object_dict = self.__dict__.copy()
         if object_dict.get('_sa_instance_state'):
             del object_dict['_sa_instance_state']
         return '[{}] ({}) {}'.format(cls, self.id, object_dict)
