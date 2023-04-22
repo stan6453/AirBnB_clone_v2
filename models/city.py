@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ City Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
 
@@ -19,3 +19,6 @@ class City(BaseModel, Base):
     else:
         state_id = ''
         name = ''
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
