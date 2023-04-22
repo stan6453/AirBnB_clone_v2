@@ -27,3 +27,6 @@ class State(BaseModel, Base):
             cities_dict = storage.all(City)
             return [obj for obj in cities_dict.values()
                     if obj.state_id == self.id]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
