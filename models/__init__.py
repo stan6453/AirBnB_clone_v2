@@ -11,19 +11,3 @@ else:
     storage = FileStorage()
 
 storage.reload()
-
-"""support for lines like `from models import *`
-"""
-if True:
-    """
-    module level import needs to be at the top of the file,
-    hence this if block.
-    Placed down here to avoid circular import clash with the modules
-    below trying to import `storage` before it declared.
-    """
-    from models.user import User
-    from models.place import Place
-    from models.state import State
-    from models.city import City
-    from models.amenity import Amenity
-    from models.review import Review
