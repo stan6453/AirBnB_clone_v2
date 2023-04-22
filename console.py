@@ -3,9 +3,8 @@
 import cmd
 import sys
 import shlex
-from os import getenv
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage, storage_type
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -212,7 +211,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
 
-        if getenv('HBNB_TYPE_STORAGE') != 'db':
+        if storage_type != 'db':
             print_list = []
 
             if args:
