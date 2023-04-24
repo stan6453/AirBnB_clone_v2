@@ -26,7 +26,6 @@ def list_cities(id=None):
     states = storage.all(State).values()
     state = None
     for item in states:
-        print(type(item))
         if item.id == id:
             state = item
     return render_template('9-states.html', state=state)
