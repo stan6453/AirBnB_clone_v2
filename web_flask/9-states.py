@@ -23,7 +23,7 @@ def list_states():
 @app.route('/states/<id>', strict_slashes=False)
 def list_cities(id=None):
     """/states/<id> route"""
-    states = storage.all(State)
+    states = storage.all(State).values()
     state = None
     for item in states:
         print(type(item))
