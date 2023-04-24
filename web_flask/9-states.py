@@ -20,7 +20,7 @@ def list_states():
     return render_template('9-states.html', states=storage.all(State))
 
 
-@app.route('/states/<id>', strict_slashes=False)
+@app.route('/states/<string:id>', strict_slashes=False)
 def list_cities(id=None):
     """/states/<id> route"""
     states = storage.all(State).values()
